@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nimo Gala</title>
+
+  <link rel="stylesheet" href="assets/css/main.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/izitoast/1.4.0/css/iziToast.min.css">
+
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  <script src="https://kit.fontawesome.com/f9e68e22aa.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/izitoast/1.4.0/js/iziToast.min.js"></script>
+</head>
+<body>
+  <div id="app">
+    <div id="template">
+      <div class="container">
+        <img src="assets/img/content-1.jpg" alt="" class="w-full">
+        <img src="assets/img/content-2.jpg" alt="" class="w-full">
+      </div>
+    </div>
+
+    <div class="invitation-action" :class="{ hide: hideAction }">
+      <div class="action-container">
+        <div
+          class="attendance-wrapper"
+          :class="{ active: wrapper.attendance }"
+          align="center"
+        >
+          <div class="attendance-container">
+            <div class="w-full text-right">
+              <i
+                class="fa-regular fa-circle-xmark btn-close"
+                role="button"
+                @click="wrapper.attendance = false"
+              ></i>
+            </div>
+            <div v-if="!guestResponse" class="py-4">
+              <h3 class="mb-6">
+                Data Tamu
+              </h3>
+              <div class="form-group">
+                <label>Nama</label>
+                <input
+                  v-model="guest.name"
+                  class="mt-2"
+                  placeholder="Tulis nama lengkap atau nama panggilan"
+                  required
+                  type="text"
+                />
+              </div>
+              <div class="form-group">
+                <label>Email</label>
+                <input
+                  v-model="guest.email"
+                  class="mt-2"
+                  placeholder="Tulis email untuk mendapatkan reminder acara"
+                  required
+                  type="email"
+                />
+              </div>
+              <div
+                v-if="guest.attendance_status && guestCategories.data.length > 0"
+              >
+                <p>Pilih Kategori Tamu</p>
+                <ul class="tag" style="margin-top: 0.5rem">
+                  <li
+                    v-for="category in guestCategories.data"
+                    :key="category.id"
+                    :class="{ active: guest.category == category.id }"
+                    @click="guest.category = category.id"
+                  >
+                    {{ category.name }}
+                  </li>
+                </ul>
+                <!-- <p class="text-gray-500 mt-2">
+                  Kategori memudahkan kamu untuk mendapatkan meja pada saat hari
+                  pernikahan.
+                </p> -->
+              </div>
+              <div class="mt-4">
+                <button
+                  class="btn btn-primary"
+                  style="padding-left: 30px; padding-right: 30px"
+                  :disabled="loading"
+                  @click="attendWedding"
+                >
+                  RSVP
+                </button>
+              </div>
+            </div>
+            <div v-else class="info">
+              <div class="check-icon">
+                <i class="el-icon-check"></i>
+              </div>
+              <div class="text-center">
+                <p>Berhasil terdaftar di Event Nimo Gala</p>
+                <img
+                  :src="guestResponse.qr_code_url"
+                  alt="Undangan Pernikahan Digital"
+                  class="qr-code"
+                />
+              </div>
+              <button
+                class="btn btn-primary btn-submit"
+                @click="downloadResource(guestResponse.qr_code_url)"
+              >
+                Simpan QR Code
+              </button>
+            </div>
+          </div>
+        </div>
+        <button
+          class="btn btn-primary btn-action"
+          style="padding-left: 30px; padding-right: 30px"
+          :disabled="loading"
+          @click="openAttendanceWrapper"
+        >
+          RSVP
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const { createApp } = Vue
+
+    const API_BASE_URL = 'https://api.hummingbird.id/api'
+    const API_PATH = {
+      GUEST_CATEGORY: 'guest-category',
+      WEDDING: 'wedding',
+      WEDDING_GUEST: 'wedding-guest',
+      WEDDING_GUEST_CATEGORY: 'wedding-guest-category',
+    }
+    const CODE = 'WED-216131432'
+
+    createApp({
+      data() {
+        return {
+          message: 'Hellow Vue!',
+          active: true,
+          wrapper: {
+            attendance: false,
+          },
+          guest: {
+            name: '',
+            email: '',
+            category: null,
+            user_id: null,
+            attendance_status: true,
+            description: null,
+          },
+          loading: false,
+          guestResponse: null,
+          guestCategories: {
+            data: [],
+          },
+          hideAction: false,
+        }
+      },
+      created() {
+        if (!this.active) {
+          this.guestResponse = {
+            qr_code_url: 'https://hummingbird-storage.is3.cloudhost.id/qr-codes/weddings/WED-216131432/1675776515.png',
+          }
+        }
+        this.getAllGuestCategories()
+      },
+      mounted() {
+        // window.addEventListener('scroll', this.handleScroll)
+      },
+      destroyed() {
+        // window.removeEventListener('scroll', this.handleScroll)
+      },
+      methods: {
+        handleScroll() {
+          const totalHeight = document.documentElement.scrollHeight
+          const currentScroll = document.documentElement.scrollTop
+
+          if (totalHeight - 1500 < currentScroll) {
+            this.hideAction = true
+          } else {
+            this.hideAction = false
+          }
+        },
+        scrollToMessages() {
+          this.$scrollTo('#guest-messages')
+        },
+        forceDownload(blob, filename) {
+          const a = document.createElement('a')
+          a.download = filename
+          a.href = blob
+          document.body.appendChild(a)
+          a.click()
+          a.remove()
+        },
+        downloadResource(url, filename) {
+          if (!filename) filename = url.split('\\').pop().split('/').pop()
+          axios(url, {
+            headers: new Headers({
+              Origin: location.origin,
+            }),
+          })
+            .then((response) => response.blob())
+            .then((blob) => {
+              const blobUrl = window.URL.createObjectURL(blob)
+              this.forceDownload(blobUrl, filename)
+            })
+        },
+        openAttendanceWrapper() {
+          this.wrapper.attendance = true
+        },
+        async getAllGuestCategories() {
+          try {
+            const response = await axios.get(
+              `${API_BASE_URL}/${API_PATH.WEDDING}/${CODE}/${API_PATH.GUEST_CATEGORY}`
+            )
+            console.log(response.data)
+            this.guestCategories = response.data
+          } catch (err) {
+            //
+          }
+        },
+        async attendWedding() {
+          if (this.guestResponse) return
+          this.loading = true
+
+          const payload = {
+            wedding_code: CODE,
+            description: this.guest.description,
+            attendance_status: this.guest.attendance_status,
+            name: this.guest.name,
+            email: this.guest.email,
+            user_id: this.guest.user_id,
+            category_id: this.guest.category,
+          }
+
+          if (this.guest.attendance_status) {
+            this.guest.description = null
+          } else {
+            this.guest.category_id = null
+          }
+
+          try {
+            const response = await axios.post(
+              `${API_BASE_URL}/${API_PATH.WEDDING_GUEST}`,
+              payload
+            )
+            this.guestResponse = response.data
+            setTimeout(() => {
+              this.loading = false
+            }, 2000)
+          } catch (err) {
+            iziToast.error({
+              title: 'Error',
+              message: 'Terjadi kesalahan. Silahkan ulangi beberapa saat lagi'
+            })
+          }
+          this.loading = false
+        },
+      },
+    }).mount('#app')
+  </script>
+</body>
+</html>

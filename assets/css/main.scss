@@ -1,0 +1,251 @@
+$font-size: 16;
+$qr-wrapper-height: 450px;
+
+$container-width: 350px;
+$color-theme: #0E0610;
+$color-secondary: #edd4b5;
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Montserrat', sans-serif;
+}
+
+body {
+  background-color: $color-theme;
+}
+
+.container {
+  max-width: $container-width;
+  margin: 0 auto;
+}
+
+.w-full {
+  width: 100%;
+}
+
+.w-50 {
+  width: 50%;
+}
+
+.py-4 {
+  margin: 1rem auto;
+}
+
+.mt-2 {
+  margin-top: .5rem;
+}
+
+.mt-4 {
+  margin-top: 1rem;
+}
+
+.mb-2 {
+  margin-bottom: .5rem;
+}
+
+.mb-4 {
+  margin-bottom: 1rem;
+}
+
+.mb-6 {
+  margin-bottom: 1.5rem;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.text-left {
+  text-align: left;
+}
+
+.flex {
+  display: flex;
+}
+
+.flex-wrap {
+  flex-wrap: wrap;
+}
+
+.justify-between {
+  justify-content: space-between;
+}
+
+.justify-center {
+  justify-content: center;
+}
+
+.justify-start {
+  justify-content: flex-start;
+}
+
+.justify-end {
+  justify-content: flex-end;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+label {
+  padding-bottom: 10px;
+}
+
+input, select {
+  width: 100%;
+  padding: 10px 12px;
+}
+
+button {
+  border: none;
+  padding: 12px 15px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+#template {
+  min-height: 100vh;
+}
+
+/* Invitation action */
+.invitation-action {
+  position: sticky;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 999;
+  transition: opacity 300ms;
+
+  &.hide {
+    opacity: 0;
+    pointer-events: none;
+    position: absolute
+  }
+
+  .action-container {
+    display: flex;
+    justify-content: center;
+    padding: 0.6rem;
+    right: 0;
+    bottom: 0;
+    background-color: $color-theme;
+  }
+
+  .btn-action {
+    background-color: $color-secondary;
+
+    &.lite {
+      background: transparent;
+    }
+  }
+
+  .attendance-wrapper {
+    box-shadow: 0px 0px 10px #ddd;
+    height: $qr-wrapper-height;
+    position: fixed;
+    z-index: 999;
+    left: 0;
+    right: 0;
+    bottom: -$qr-wrapper-height;
+    background-color: #fff;
+    overflow-x: hidden;
+    padding: 1rem 500px;
+    transition: 0.5s;
+
+    .attendance-container {
+      text-align: left;
+      max-width: 768ox;
+    }
+
+    &.active {
+      bottom: 0;
+    }
+
+    .btn-close {
+      font-size: 2rem;
+      color: rgba(0, 0, 0, 0.5);
+      transition: all 300ms;
+      cursor: pointer;
+      &:hover {
+        color: #000;
+      }
+    }
+
+    .info {
+      padding-bottom: 20px;
+    }
+
+    .check-icon {
+      margin-top: 2rem;
+      font-size: 50px;
+    }
+
+    .btn-submit {
+      width: 100%;
+    }
+  }
+}
+
+img.qr-code {
+  width: 300px;
+  margin: 0 auto;
+  margin-bottom: 10px;
+}
+
+@media only screen and (max-width: 1200px) {
+  .invitation-action {
+    .attendance-wrapper {
+      padding: 1.5rem;
+    }
+  }
+}
+
+@media only screen and (max-width: 480px) {
+  .invitation-action {
+    .attendance-wrapper {
+      .btn-close {
+        font-size: 1rem;
+      }
+    }
+    .btn-action {
+      width: 100%;
+      font-size: $font-size - 4;
+    }
+  }
+}
+
+ul.tag {
+  margin-top: .5rem;
+  li {
+    margin-top: .25rem;
+    margin-bottom: 1rem;
+    cursor: pointer;
+    display: inline-block;
+    padding: 0.5rem 1.2rem;
+    background-color: white;
+    border: 2px solid $color-secondary;
+    border-radius: 25px;
+    margin-right: 10px;
+    transition: all 300ms;
+    font-size: 14px;
+
+    &.basic {
+      background-color: #ddd;
+      border: none;
+    }
+
+    &.active {
+      background-color: $color-secondary;
+    }
+
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+}
