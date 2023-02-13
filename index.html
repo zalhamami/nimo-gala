@@ -56,10 +56,10 @@
             </div>
             <div v-if="!guestResponse" class="py-4">
               <h3 class="mb-6">
-                Data Tamu
+                Guest Data
               </h3>
               <div class="form-group">
-                <label>Nama</label>
+                <label>Name</label>
                 <input
                   v-model="guest.name"
                   class="mt-2"
@@ -81,7 +81,7 @@
               <div
                 v-if="guest.attendance_status && guestCategories.data.length > 0"
               >
-                <p>Pilih Kategori Tamu</p>
+                <p>Choose Guest Category</p>
                 <ul class="tag" style="margin-top: 0.5rem">
                   <li
                     v-for="category in guestCategories.data"
@@ -192,6 +192,7 @@
         if (query.to) {
           this.guestName = this.decodeQueryParams(query)
         }
+        this.guest.name = this.guestName
       },
       mounted() {
         window.addEventListener('scroll', this.handleScroll)
