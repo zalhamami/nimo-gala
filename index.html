@@ -31,7 +31,7 @@
           <div class="cover-target">
             <p>{{ guestName }}</p>
           </div>
-          <button class="cover-button" @click="open">Open Invitation</button>
+          <!-- <button class="cover-button" @click="open">Open Invitation</button> -->
         </div>
         <img src="assets/img/content-1.jpg" alt="content-1" class="w-full">
         <img src="assets/img/content-2.jpg" alt="content-2" class="w-full">
@@ -100,7 +100,6 @@
               <div class="mt-4">
                 <button
                   class="btn btn-primary btn-action w-full"
-                  style="padding-left: 30px; padding-right: 30px"
                   :disabled="loading"
                   @click="attendWedding"
                 >
@@ -133,7 +132,7 @@
         </div>
         <button
           class="btn btn-primary btn-action"
-          style="padding-left: 30px; padding-right: 30px"
+          style="padding-left: 60px; padding-right: 60px"
           :disabled="loading"
           @click="openAttendanceWrapper"
         >
