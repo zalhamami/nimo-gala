@@ -147,9 +147,9 @@ button {
 #invitation-cover .cover-target {
   position: absolute;
   overflow: hidden;
-  width: 195px;
-  top: 405px;
-  left: 78px;
+  width: 208px;
+  top: 425px;
+  left: 88px;
   text-align: center;
 }
 @media (max-width: 330px) {
@@ -159,7 +159,7 @@ button {
   }
 }
 #invitation-cover .cover-target p {
-  font-size: 22px;
+  font-size: 24px;
   color: #F9DE9D;
   background: linear-gradient(to right, #FAEFDC, #F9DE9D);
   -webkit-background-clip: text;

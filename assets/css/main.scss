@@ -162,9 +162,9 @@ button {
     &-target {
       position: absolute;
       overflow: hidden;
-      width: 195px;
-      top: 405px;
-      left: 78px;
+      width: 208px;
+      top: 425px;
+      left: 88px;
       text-align: center;
 
       @media (max-width: 330px) {
@@ -173,7 +173,7 @@ button {
       }
       
       p {
-        font-size: 22px;
+        font-size: 24px;
         color: $color-primary;
         background: linear-gradient(to right, $color-secondary, $color-primary);
         -webkit-background-clip: text;
