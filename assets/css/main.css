@@ -136,6 +136,12 @@ button {
   left: 78px;
   text-align: center;
 }
+@media (max-width: 330px) {
+  #invitation-cover .cover-target {
+    top: 390px;
+    left: 68px;
+  }
+}
 #invitation-cover .cover-target p {
   font-size: 22px;
   color: #F9DE9D;

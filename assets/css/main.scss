@@ -145,6 +145,11 @@ button {
     top: 405px;
     left: 78px;
     text-align: center;
+
+    @media (max-width: 330px) {
+      top: 390px;
+      left: 68px;
+    }
     
     p {
       font-size: 22px;
