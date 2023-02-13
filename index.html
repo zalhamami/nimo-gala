@@ -13,11 +13,13 @@
   <link rel="stylesheet" href="assets/css/main.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Roboto&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Roboto&display=swap">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/izitoast/1.4.0/css/iziToast.min.css">
+  <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
 
   <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
   <script src="https://kit.fontawesome.com/f9e68e22aa.js" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/izitoast/1.4.0/js/iziToast.min.js"></script>
 </head>
@@ -28,11 +30,15 @@
         <div
           id="invitation-cover"
           :class="{ opened }"
+          style="background-image: url('assets/img/cover/cover-background.jpg');"
         >
-          <img src="assets/img/cover.jpg" alt="cover" class="w-full">
-          <div class="cover-target">
+          <img src="assets/img/logo-gala.png" alt="cover" class="cover-logo" data-aos="fade-in">
+          <img src="assets/img/cover/guest-box.png" alt="cover" class="cover-guest-box" data-aos="fade-up" data-aos-delay="1000">
+          <div class="cover-target" data-aos="fade-in" data-aos-delay="2000">
             <p>{{ guestName }}</p>
           </div>
+          <img src="assets/img/cover/cover-date.png" alt="cover" class="cover-date" data-aos="fade-in" data-aos-delay="2500" :data-aos-offset="-500">
+          <img src="assets/img/cover/social-media.png" alt="cover" class="cover-social-media">
           <!-- <button class="cover-button" @click="open">Open Invitation</button> -->
         </div>
         <img src="assets/img/content-1.jpg" alt="content-1" class="w-full">
@@ -196,6 +202,9 @@
         this.guest.name = this.guestName
       },
       mounted() {
+        AOS.init({
+          duration: 1500
+        })
         window.addEventListener('scroll', this.handleScroll)
       },
       destroyed() {
