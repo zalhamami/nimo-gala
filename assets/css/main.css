@@ -124,9 +124,25 @@ button {
   height: 100vh;
   opacity: 1;
   transition: all 2000ms;
+  background-size: cover;
+  background-position: center;
+  padding: 150px 0;
 }
 #invitation-cover.opened {
   height: 0;
+}
+#invitation-cover .cover img {
+  margin: 0 auto;
+}
+#invitation-cover .cover-logo {
+  width: 72%;
+}
+#invitation-cover .cover-guest-box {
+  max-width: 90%;
+  margin: 56px auto 16px auto;
+}
+#invitation-cover .cover-date {
+  max-width: 200px;
 }
 #invitation-cover .cover-target {
   position: absolute;
@@ -142,6 +158,10 @@ button {
   background: linear-gradient(to right, #FAEFDC, #F9DE9D);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+}
+#invitation-cover .cover-social-media {
+  margin-top: 40px;
+  width: 70%;
 }
 #invitation-cover .cover-button {
   background: transparent;
