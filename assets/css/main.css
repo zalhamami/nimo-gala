@@ -2,7 +2,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: "Montserrat", sans-serif;
+  font-family: "Bebas Neue", cursive;
 }
 
 body {
@@ -102,12 +102,58 @@ button {
   font-weight: 600;
 }
 
+.bg-theme {
+  background-color: #0E0610;
+}
+
+.text-primary {
+  color: #F9DE9D;
+}
+
 #template {
   min-height: 100vh;
 }
 
+/* Invitation cover */
+#invitation-cover {
+  text-align: center;
+  overflow: hidden;
+  position: relative;
+  color: white;
+  letter-spacing: 1;
+  height: 100vh;
+  opacity: 1;
+  transition: all 2000ms;
+}
+#invitation-cover.opened {
+  height: 0;
+}
+#invitation-cover .cover-target {
+  position: absolute;
+  overflow: hidden;
+  width: 195px;
+  top: 105vw;
+  left: 20vw;
+  text-align: center;
+}
+#invitation-cover .cover-target p {
+  font-size: 22px;
+  color: #F9DE9D;
+  background: linear-gradient(to right, #FAEFDC, #F9DE9D);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+#invitation-cover .cover-button {
+  background: transparent;
+  text-align: center;
+  color: #F9DE9D;
+  border: 1px solid #F9DE9D;
+  margin: 1rem auto;
+  padding: 10px 50px;
+}
+
 /* Invitation action */
-.invitation-action {
+#invitation-action {
   position: sticky;
   left: 0;
   right: 0;
@@ -115,26 +161,28 @@ button {
   z-index: 999;
   transition: opacity 300ms;
 }
-.invitation-action.hide {
+#invitation-action.hide {
   opacity: 0;
   pointer-events: none;
   position: absolute;
 }
-.invitation-action .action-container {
+#invitation-action .action-container {
   display: flex;
   justify-content: center;
   padding: 0.6rem;
   right: 0;
   bottom: 0;
-  background-color: #0E0610;
 }
-.invitation-action .btn-action {
-  background-color: #edd4b5;
+#invitation-action .btn-action {
+  background-color: #FAEFDC;
+  border-radius: 30px;
+  box-shadow: 0px 0px 10px #ddd;
+  font-size: 18px;
 }
-.invitation-action .btn-action.lite {
+#invitation-action .btn-action.lite {
   background: transparent;
 }
-.invitation-action .attendance-wrapper {
+#invitation-action .attendance-wrapper {
   box-shadow: 0px 0px 10px #ddd;
   height: 450px;
   position: fixed;
@@ -147,30 +195,33 @@ button {
   padding: 1rem 500px;
   transition: 0.5s;
 }
-.invitation-action .attendance-wrapper .attendance-container {
+#invitation-action .attendance-wrapper .attendance-container {
   text-align: left;
   max-width: 768ox;
 }
-.invitation-action .attendance-wrapper.active {
+#invitation-action .attendance-wrapper .attendance-container * {
+  font-family: "Roboto", sans-serif;
+}
+#invitation-action .attendance-wrapper.active {
   bottom: 0;
 }
-.invitation-action .attendance-wrapper .btn-close {
+#invitation-action .attendance-wrapper .btn-close {
   font-size: 2rem;
   color: rgba(0, 0, 0, 0.5);
   transition: all 300ms;
   cursor: pointer;
 }
-.invitation-action .attendance-wrapper .btn-close:hover {
+#invitation-action .attendance-wrapper .btn-close:hover {
   color: #000;
 }
-.invitation-action .attendance-wrapper .info {
+#invitation-action .attendance-wrapper .info {
   padding-bottom: 20px;
 }
-.invitation-action .attendance-wrapper .check-icon {
+#invitation-action .attendance-wrapper .check-icon {
   margin-top: 2rem;
   font-size: 50px;
 }
-.invitation-action .attendance-wrapper .btn-submit {
+#invitation-action .attendance-wrapper .btn-submit {
   width: 100%;
 }
 
@@ -180,18 +231,9 @@ img.qr-code {
   margin-bottom: 10px;
 }
 
-@media only screen and (max-width: 1200px) {
-  .invitation-action .attendance-wrapper {
-    padding: 1.5rem;
-  }
-}
 @media only screen and (max-width: 480px) {
-  .invitation-action .attendance-wrapper .btn-close {
-    font-size: 1rem;
-  }
-  .invitation-action .btn-action {
-    width: 100%;
-    font-size: 12;
+  #invitation-action .attendance-wrapper .btn-close {
+    font-size: 1.5rem;
   }
 }
 ul.tag {
@@ -204,7 +246,7 @@ ul.tag li {
   display: inline-block;
   padding: 0.5rem 1.2rem;
   background-color: white;
-  border: 2px solid #edd4b5;
+  border: 2px solid #0E0610;
   border-radius: 25px;
   margin-right: 10px;
   transition: all 300ms;
@@ -215,7 +257,8 @@ ul.tag li.basic {
   border: none;
 }
 ul.tag li.active {
-  background-color: #edd4b5;
+  background-color: #0E0610;
+  color: white;
 }
 ul.tag li:last-child {
   margin-right: 0;

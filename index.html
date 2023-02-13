@@ -4,12 +4,14 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Nimo Gala</title>
+  <title>Nimo TV Gala</title>
+  <meta name="description" content="Nimo TV Gala Invitation">
+  <meta name="og:description" content="Nimo TV Gala Invitation">
 
   <link rel="stylesheet" href="assets/css/main.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Roboto&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/izitoast/1.4.0/css/iziToast.min.css">
 
   <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
@@ -18,15 +20,26 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/izitoast/1.4.0/js/iziToast.min.js"></script>
 </head>
 <body>
-  <div id="app">
+  <div id="app">    
     <div id="template">
       <div class="container">
-        <img src="assets/img/content-1.jpg" alt="" class="w-full">
-        <img src="assets/img/content-2.jpg" alt="" class="w-full">
+        <div
+          id="invitation-cover"
+          :class="{ opened }"
+        >
+          <img src="assets/img/cover.jpg" alt="cover" class="w-full">
+          <div class="cover-target">
+            <p>{{ guestName }}</p>
+          </div>
+          <button class="cover-button" @click="open">Open Invitation</button>
+        </div>
+        <img src="assets/img/content-1.jpg" alt="content-1" class="w-full">
+        <img src="assets/img/content-2.jpg" alt="content-2" class="w-full">
+        <img src="assets/img/content-3.jpg" alt="content-3" class="w-full">
       </div>
     </div>
 
-    <div class="invitation-action" :class="{ hide: hideAction }">
+    <div id="invitation-action" :class="{ hide: hideAction }">
       <div class="action-container">
         <div
           class="attendance-wrapper"
@@ -86,12 +99,12 @@
               </div>
               <div class="mt-4">
                 <button
-                  class="btn btn-primary"
+                  class="btn btn-primary btn-action w-full"
                   style="padding-left: 30px; padding-right: 30px"
                   :disabled="loading"
                   @click="attendWedding"
                 >
-                  RSVP
+                  Attend
                 </button>
               </div>
             </div>
@@ -100,19 +113,21 @@
                 <i class="el-icon-check"></i>
               </div>
               <div class="text-center">
-                <p>Berhasil terdaftar di Event Nimo Gala</p>
+                <p class="mb-2">
+                  Berhasil terdaftar di Event Nimo TV Gala. Simpan QR untuk menghadiri event.
+                </p>
                 <img
                   :src="guestResponse.qr_code_url"
                   alt="Undangan Pernikahan Digital"
                   class="qr-code"
                 />
               </div>
-              <button
+              <!-- <button
                 class="btn btn-primary btn-submit"
                 @click="downloadResource(guestResponse.qr_code_url)"
               >
                 Simpan QR Code
-              </button>
+              </button> -->
             </div>
           </div>
         </div>
@@ -122,7 +137,7 @@
           :disabled="loading"
           @click="openAttendanceWrapper"
         >
-          RSVP
+          Attend
         </button>
       </div>
     </div>
@@ -143,8 +158,8 @@
     createApp({
       data() {
         return {
-          message: 'Hellow Vue!',
           active: true,
+          opened: false,
           wrapper: {
             attendance: false,
           },
@@ -161,7 +176,8 @@
           guestCategories: {
             data: [],
           },
-          hideAction: false,
+          guestName: 'Guest',
+          hideAction: true,
         }
       },
       created() {
@@ -171,19 +187,44 @@
           }
         }
         this.getAllGuestCategories()
+
+        const query = this.getQueryParams()
+        if (query.to) {
+          this.guestName = this.decodeQueryParams(query)
+        }
       },
       mounted() {
-        // window.addEventListener('scroll', this.handleScroll)
+        window.addEventListener('scroll', this.handleScroll)
       },
       destroyed() {
-        // window.removeEventListener('scroll', this.handleScroll)
+        window.removeEventListener('scroll', this.handleScroll)
       },
       methods: {
+        open() {
+          this.opened = true
+          this.$emit('opened')
+        },
+        getQueryParams() {
+          return new Proxy(new URLSearchParams(window.location.search), {
+            get: (searchParams, prop) => searchParams.get(prop),
+          })
+        },
+        decodeQueryParams(query) {
+          let result = query.to.replace(/-/g, ' ')
+          const queryKeys = Object.keys(query)
+
+          if (queryKeys.length > 1) {
+            const partner = queryKeys[1].replace(/-/g, ' ')
+            result += ` & ${partner}`
+          }
+
+          return result.replace(/\s\s+/g, ' ')
+        },
         handleScroll() {
           const totalHeight = document.documentElement.scrollHeight
           const currentScroll = document.documentElement.scrollTop
 
-          if (totalHeight - 1500 < currentScroll) {
+          if (currentScroll < 500 || totalHeight - 1000 < currentScroll) {
             this.hideAction = true
           } else {
             this.hideAction = false
@@ -221,7 +262,6 @@
             const response = await axios.get(
               `${API_BASE_URL}/${API_PATH.WEDDING}/${CODE}/${API_PATH.GUEST_CATEGORY}`
             )
-            console.log(response.data)
             this.guestCategories = response.data
           } catch (err) {
             //

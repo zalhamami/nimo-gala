@@ -3,13 +3,14 @@ $qr-wrapper-height: 450px;
 
 $container-width: 350px;
 $color-theme: #0E0610;
-$color-secondary: #edd4b5;
+$color-primary: #F9DE9D;
+$color-secondary: #FAEFDC;
 
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'Bebas Neue', cursive;
 }
 
 body {
@@ -109,12 +110,63 @@ button {
   font-weight: 600;
 }
 
+.bg-theme {
+  background-color: $color-theme;
+}
+
+.text-primary {
+  color: $color-primary;
+}
+
 #template {
   min-height: 100vh;
 }
 
+/* Invitation cover */
+
+#invitation-cover {
+  text-align: center;
+  overflow: hidden;
+  position: relative;
+  color: white;
+  letter-spacing: 1;
+  height: 100vh;
+  opacity: 1;
+  transition: all 2000ms;
+
+  &.opened {
+    height: 0;
+  }
+
+  .cover-target {
+    position: absolute;
+    overflow: hidden;
+    width: 195px;
+    top: 105vw;
+    left: 20vw;
+    text-align: center;
+    
+    p {
+      font-size: 22px;
+      color: $color-primary;
+      background: linear-gradient(to right, $color-secondary, $color-primary);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+  }
+
+  .cover-button {
+    background: transparent;
+    text-align: center;
+    color: $color-primary;
+    border: 1px solid $color-primary;
+    margin: 1rem auto;
+    padding: 10px 50px;
+  }
+}
+
 /* Invitation action */
-.invitation-action {
+#invitation-action {
   position: sticky;
   left: 0;
   right: 0;
@@ -134,11 +186,13 @@ button {
     padding: 0.6rem;
     right: 0;
     bottom: 0;
-    background-color: $color-theme;
   }
 
   .btn-action {
     background-color: $color-secondary;
+    border-radius: 30px;
+    box-shadow: 0px 0px 10px #ddd;
+    font-size: 18px;
 
     &.lite {
       background: transparent;
@@ -161,6 +215,10 @@ button {
     .attendance-container {
       text-align: left;
       max-width: 768ox;
+
+      * {
+        font-family: 'Roboto', sans-serif;
+      }
     }
 
     &.active {
@@ -198,24 +256,12 @@ img.qr-code {
   margin-bottom: 10px;
 }
 
-@media only screen and (max-width: 1200px) {
-  .invitation-action {
-    .attendance-wrapper {
-      padding: 1.5rem;
-    }
-  }
-}
-
 @media only screen and (max-width: 480px) {
-  .invitation-action {
+  #invitation-action {
     .attendance-wrapper {
       .btn-close {
-        font-size: 1rem;
+        font-size: 1.5rem;
       }
-    }
-    .btn-action {
-      width: 100%;
-      font-size: $font-size - 4;
     }
   }
 }
@@ -229,7 +275,7 @@ ul.tag {
     display: inline-block;
     padding: 0.5rem 1.2rem;
     background-color: white;
-    border: 2px solid $color-secondary;
+    border: 2px solid $color-theme;
     border-radius: 25px;
     margin-right: 10px;
     transition: all 300ms;
@@ -241,7 +287,8 @@ ul.tag {
     }
 
     &.active {
-      background-color: $color-secondary;
+      background-color: $color-theme;
+      color: white;
     }
 
     &:last-child {
