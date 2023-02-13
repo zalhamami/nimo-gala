@@ -213,6 +213,10 @@ button {
     padding: 1rem 500px;
     transition: 0.5s;
 
+    @media (max-width: 1200px) {
+      padding: 1.5rem;
+    }
+
     .attendance-container {
       text-align: left;
       max-width: 768ox;

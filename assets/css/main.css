@@ -196,6 +196,11 @@ button {
   padding: 1rem 500px;
   transition: 0.5s;
 }
+@media (max-width: 1200px) {
+  #invitation-action .attendance-wrapper {
+    padding: 1.5rem;
+  }
+}
 #invitation-action .attendance-wrapper .attendance-container {
   text-align: left;
   max-width: 768ox;
