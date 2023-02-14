@@ -1,4 +1,4 @@
-$font-size: 16;
+$font-size: 16px;
 $qr-wrapper-height: 450px;
 
 $container-width: 380px;
@@ -116,6 +116,26 @@ button {
 
 .text-primary {
   color: $color-primary;
+
+  p {
+    color: $color-primary;
+  }
+}
+
+.text-secondary {
+  color: $color-secondary;
+
+  p {
+    color: $color-secondary;
+  }
+}
+
+.text-gradient {
+  color: $color-primary;
+  background: linear-gradient(to right, $color-secondary, $color-primary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  letter-spacing: 1px;
 }
 
 #template {
@@ -151,12 +171,12 @@ button {
     }
 
     &-guest-box {
-      max-width: 90%;
+      width: 90%;
       margin: 56px auto 16px auto;
     }
 
     &-date {
-      max-width: 200px;
+      width: 200px;
     }
 
     &-target {
@@ -174,10 +194,6 @@ button {
       
       p {
         font-size: 24px;
-        color: $color-primary;
-        background: linear-gradient(to right, $color-secondary, $color-primary);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
       }
     }
 
@@ -299,6 +315,73 @@ img.qr-code {
       .btn-close {
         font-size: 1.5rem;
       }
+    }
+  }
+}
+
+#invitation-opening {
+  background-image: url('../img/opening/opening-background.jpg');
+  background-position: center;
+  background-size: cover;
+  padding: 4rem 0;
+  position: relative;
+
+  .opening {
+    &-box {
+      width: 90%;
+      margin: 0 auto;
+      position: relative;
+      z-index: 99;
+    }
+
+    &-content {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      text-align: center;
+      padding: 6.5rem 3rem;
+      z-index: 999;
+    }
+
+    &-logo {
+      width: 50%;
+      margin: 0 auto 24px auto;
+    }
+
+    &-title {
+      font-size: 40px;
+    }
+
+    &-subtitle {
+      line-height: 1.2;
+    }
+
+    &-details {
+      border-bottom: 1px solid $color-secondary;
+      max-width: 250px;
+      margin: 4.5rem auto 0 auto;
+      padding-bottom: 2rem;
+
+      p {
+        font-family: 'Roboto', sans-serif;
+        font-weight: 400;
+        font-size: $font-size - 4;
+        letter-spacing: .5px;
+        line-height: 1.5;
+      }
+    }
+
+    &-cheers {
+      width: 20%;
+    }
+
+    &-light {
+      position: absolute;
+      bottom: -100px;
+      right: 0;
+      width: 270px;
     }
   }
 }

@@ -109,6 +109,24 @@ button {
 .text-primary {
   color: #F9DE9D;
 }
+.text-primary p {
+  color: #F9DE9D;
+}
+
+.text-secondary {
+  color: #FAEFDC;
+}
+.text-secondary p {
+  color: #FAEFDC;
+}
+
+.text-gradient {
+  color: #F9DE9D;
+  background: linear-gradient(to right, #FAEFDC, #F9DE9D);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  letter-spacing: 1px;
+}
 
 #template {
   min-height: 100vh;
@@ -138,11 +156,11 @@ button {
   width: 72%;
 }
 #invitation-cover .cover-guest-box {
-  max-width: 90%;
+  width: 90%;
   margin: 56px auto 16px auto;
 }
 #invitation-cover .cover-date {
-  max-width: 200px;
+  width: 200px;
 }
 #invitation-cover .cover-target {
   position: absolute;
@@ -160,10 +178,6 @@ button {
 }
 #invitation-cover .cover-target p {
   font-size: 24px;
-  color: #F9DE9D;
-  background: linear-gradient(to right, #FAEFDC, #F9DE9D);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
 }
 #invitation-cover .cover-social-media {
   margin-top: 40px;
@@ -268,6 +282,62 @@ img.qr-code {
     font-size: 1.5rem;
   }
 }
+#invitation-opening {
+  background-image: url("../img/opening/opening-background.jpg");
+  background-position: center;
+  background-size: cover;
+  padding: 4rem 0;
+  position: relative;
+}
+#invitation-opening .opening-box {
+  width: 90%;
+  margin: 0 auto;
+  position: relative;
+  z-index: 99;
+}
+#invitation-opening .opening-content {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  text-align: center;
+  padding: 6.5rem 3rem;
+  z-index: 999;
+}
+#invitation-opening .opening-logo {
+  width: 50%;
+  margin: 0 auto 24px auto;
+}
+#invitation-opening .opening-title {
+  font-size: 40px;
+}
+#invitation-opening .opening-subtitle {
+  line-height: 1.2;
+}
+#invitation-opening .opening-details {
+  border-bottom: 1px solid #FAEFDC;
+  max-width: 250px;
+  margin: 4.5rem auto 0 auto;
+  padding-bottom: 2rem;
+}
+#invitation-opening .opening-details p {
+  font-family: "Roboto", sans-serif;
+  font-weight: 400;
+  font-size: 12px;
+  letter-spacing: 0.5px;
+  line-height: 1.5;
+}
+#invitation-opening .opening-cheers {
+  width: 20%;
+}
+#invitation-opening .opening-light {
+  position: absolute;
+  bottom: -100px;
+  right: 0;
+  width: 270px;
+}
+
 ul.tag {
   margin-top: 0.5rem;
 }
