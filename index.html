@@ -56,57 +56,58 @@
             data-aos-delay="2500"
             :data-aos-offset="-500"
           >
+          <button class="cover-button" @click="open">Open Invitation</button>
           <img
             src="assets/img/cover/social-media.png"
             alt="cover"
             class="cover-social-media"
           >
-          <!-- <button class="cover-button" @click="open">Open Invitation</button> -->
         </div>
-        <div id="invitation-opening" class="text-secondary" align="center">
-          <img src="assets/img/opening/opening-box.png" alt="opening-box" class="opening-box" data-aos="fade-in">
-          <div class="opening-content">
-            <img
-              src="assets/img/logo-gala.png"
-              alt="opening-box-logo"
-              class="opening-logo mb-4"
-              data-aos="fade-in"
-              data-aos-delay="500"
-            >
-            <p class="opening-title text-gradient" data-aos="zoom-in" data-aos-delay="1000">
-              CONGRATULATIONS!
-            </p>
-            <div class="opening-subtitle mt-2" data-aos="fade-in" data-aos-delay="1500">
-              <p class="text-gradient">
-                You are invited to
-              </p>
-              <p class="text-gradient">
-                A new rise of entertainment has begun!
-              </p>
+        <div v-if="opened">
+          <div id="invitation-opening" class="text-secondary" align="center">
+            <div>
+              <img src="assets/img/opening/opening-box.png" alt="opening-box" class="opening-box">
+              <div class="opening-content">
+                <img
+                  src="assets/img/logo-gala.png"
+                  alt="opening-box-logo"
+                  class="opening-logo mb-4"
+                >
+                <p class="opening-title text-gradient">
+                  CONGRATULATIONS!
+                </p>
+                <div class="opening-subtitle mt-2">
+                  <p class="text-gradient">
+                    You are invited to
+                  </p>
+                  <p class="text-gradient">
+                    A new rise of entertainment has begun!
+                  </p>
+                </div>
+                <div class="opening-details">
+                  <img
+                    src="assets/img/opening/opening-cheers.png"
+                    alt="opening-chhers"
+                    class="opening-cheers mb-4"
+                  >
+                  <p>
+                    NIMO TV Gala 2023 is flying back to you
+                    and now coming to Bali this year! and we
+                    are happy you are the part of our celebration.
+                  </p>
+                </div> 
+              </div>
             </div>
-            <div class="opening-details" data-aos="zoom-in-up" data-aos-delay="1500">
-              <img
-                src="assets/img/opening/opening-cheers.png"
-                alt="opening-chhers"
-                class="opening-cheers mb-4"
-                data-aos="flip-left"
-              >
-              <p>
-                NIMO TV Gala 2023 is flying back to you
-                and now coming to Bali this year! and we
-                are happy you are the part of our celebration.
-              </p>
-            </div> 
+            <!-- <img
+              src="assets/img/opening/opening-light.png"
+              alt="opening-light"
+              class="opening-light"
+            > -->
           </div>
-          <!-- <img
-            src="assets/img/opening/opening-light.png"
-            alt="opening-light"
-            class="opening-light"
-          > -->
+          <img src="assets/img/content-1.jpg" alt="content-1" class="w-full">
+          <img src="assets/img/content-2.jpg" alt="content-2" class="w-full">
+          <img src="assets/img/content-3.jpg" alt="content-3" class="w-full">
         </div>
-        <img src="assets/img/content-1.jpg" alt="content-1" class="w-full">
-        <img src="assets/img/content-2.jpg" alt="content-2" class="w-full">
-        <img src="assets/img/content-3.jpg" alt="content-3" class="w-full">
       </div>
     </div>
 

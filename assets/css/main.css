@@ -148,6 +148,7 @@ button {
 }
 #invitation-cover.opened {
   height: 0;
+  padding: 0;
 }
 #invitation-cover .cover img {
   margin: 0 auto;
@@ -190,6 +191,12 @@ button {
   border: 1px solid #F9DE9D;
   margin: 1rem auto;
   padding: 10px 50px;
+  letter-spacing: 1px;
+  transition: all 300ms;
+}
+#invitation-cover .cover-button:hover {
+  background-color: #F9DE9D;
+  color: #0E0610;
 }
 
 /* Invitation action */
