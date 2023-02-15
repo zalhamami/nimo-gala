@@ -22,6 +22,7 @@
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/izitoast/1.4.0/js/iziToast.min.js"></script>
+  <script src="assets/js/tabs.js"></script>
 </head>
 <body>
   <div id="app">    
@@ -56,7 +57,9 @@
             data-aos-delay="2500"
             :data-aos-offset="-500"
           >
-          <button class="cover-button" @click="open">Open Invitation</button>
+          <div class="w-full">
+            <button class="cover-button" @click="open">Open Invitation</button>
+          </div>
           <img
             src="assets/img/cover/social-media.png"
             alt="cover"
@@ -104,9 +107,33 @@
               class="opening-light"
             > -->
           </div>
+          <img src="assets/img/venue.jpg" alt="venue" class="w-full">
+          <div class="venue-maps" align="center">
+            <a href="https://goo.gl/maps/yubJTMKng6r2AWr2A" target="_blank">
+              <button class="btn btn-primary btn-action">
+                Open Maps
+              </button>
+            </a>
+          </div>
+          <img src="assets/img/dresscode.jpg" alt="dresscode" class="w-full">
           <img src="assets/img/content-1.jpg" alt="content-1" class="w-full">
           <img src="assets/img/content-2.jpg" alt="content-2" class="w-full">
-          <img src="assets/img/content-3.jpg" alt="content-3" class="w-full">
+          <img src="assets/img/flowtrip.jpg" alt="flowtrip" class="w-full">
+          <div class="counting-text" align="center">
+            <h2 class="text-gradient">COUNTING DAYS</h2>
+            <p class="text-gradient">SEE YOU THERE!</p>
+            <div class="flex justify-center flex-wrap mt-4">
+              <a href="https://www.instagram.com/nimotv_id/" target="_blank">
+                <img src="assets/img/icons/instagram.png" alt="instagram">
+                Nimo TV
+              </a>
+              <a href="https://www.instagram.com/nimoliveshow_id/" target="_blank">
+                <img src="assets/img/icons/instagram.png" alt="instagram">
+                Nimo TV Liveshow
+              </a>
+            </div>
+          </div>
+          <img src="assets/img/closing.jpg" alt="flowtrip" class="w-full">
         </div>
       </div>
     </div>
@@ -126,79 +153,141 @@
                 @click="wrapper.attendance = false"
               ></i>
             </div>
-            <div v-if="!guestResponse" class="py-4">
-              <h3 class="mb-6">
-                Guest Data
-              </h3>
-              <div class="form-group">
-                <label>Name</label>
-                <input
-                  v-model="guest.name"
-                  class="mt-2"
-                  placeholder="Tulis nama lengkap atau nama panggilan"
-                  required
-                  type="text"
-                />
+            <div class="tab-container">
+              <div class="tabs">
+                <span class="tab active">RSVP</span>
+                <span class="tab">Wishes</span>
               </div>
-              <div class="form-group">
-                <label>Email</label>
-                <input
-                  v-model="guest.email"
-                  class="mt-2"
-                  placeholder="Tulis email untuk mendapatkan reminder acara"
-                  required
-                  type="email"
-                />
+              <div class="tab-panes">
+                <div class="tab-pane active">
+                  <div v-if="!guestResponse" class="py-4">
+                    <h3 class="mb-6">
+                      Each person will get each unique QR Code.
+                    </h3>
+                    <div class="form-group">
+                      <label>Name</label>
+                      <input
+                        v-model="guest.name"
+                        class="mt-2"
+                        placeholder="Write your full name"
+                        required
+                        type="text"
+                      />
+                    </div>
+                    <div class="form-group">
+                      <label>Email</label>
+                      <input
+                        v-model="guest.email"
+                        class="mt-2"
+                        placeholder="Write your email"
+                        required
+                        type="email"
+                      />
+                    </div>
+                    <div class="form-group">
+                      <label>WA Number</label>
+                      <input
+                        v-model="guest.phone"
+                        class="mt-2"
+                        placeholder="Write your WA Number"
+                        required
+                      />
+                    </div>
+                    <div
+                      v-if="guest.attendance_status && guestCategories.data.length > 0"
+                    >
+                      <p>Choose Guest Category</p>
+                      <ul class="tag" style="margin-top: 0.5rem">
+                        <li
+                          v-for="category in guestCategories.data"
+                          :key="category.id"
+                          :class="{ active: guest.category == category.id }"
+                          @click="guest.category = category.id"
+                        >
+                          {{ category.name }}
+                        </li>
+                      </ul>
+                      <!-- <p class="text-gray-500 mt-2">
+                        Kategori memudahkan kamu untuk mendapatkan meja pada saat hari
+                        pernikahan.
+                      </p> -->
+                    </div>
+                    <div class="form-group">
+                      <label>Wishes for Nimo TV</label>
+                      <textarea
+                        v-model="guest.message"
+                        class="mt-2"
+                        placeholder="Write your wishes for Nimo TV"
+                        rows="5"
+                        required
+                      ></textarea>
+                    </div>
+                    <div class="mt-4">
+                      <button
+                        class="btn btn-primary btn-action w-full"
+                        :disabled="loading"
+                        @click="attendWedding"
+                      >
+                        Attend
+                      </button>
+                    </div>
+                  </div>
+                  <div v-else class="info">
+                    <div class="check-icon">
+                      <i class="el-icon-check"></i>
+                    </div>
+                    <div class="text-center">
+                      <p class="mb-2">
+                        You are successfully register to Nimo TV Gala 2022.
+                        Save this QR Code to attend the event!
+                      </p>
+                      <img
+                        :src="guestResponse.qr_code_url"
+                        alt="Undangan Pernikahan Digital"
+                        class="qr-code"
+                      />
+                    </div>
+                    <!-- <button
+                      class="btn btn-primary btn-submit"
+                      @click="downloadResource(guestResponse.qr_code_url)"
+                    >
+                      Simpan QR Code
+                    </button> -->
+                  </div>
+                </div>
+                <div class="tab-pane">
+                  <h3>All Wishes</h3>
+                  <div class="user-comments">
+                    <div
+                      v-for="comment in comments.data"
+                      :key="comment.id"
+                      class="comment-container"
+                    >
+                      <div class="content">
+                        <p class="font-semibold">
+                          {{ comment.name }}
+                        </p>
+                        <p class="mt-1">
+                          {{ comment.content }}
+                        </p>
+                      </div>
+                    </div>
+                    <div
+                      v-if="
+                        comments.last_page != 1 && comments.current_page != comments.last_page
+                      "
+                      class="load-more"
+                      @click="loadMoreComments"
+                    >
+                      Lihat lebih banyak
+                      <i
+                        class="el-icon-arrow-down"
+                        style="position: relative; top: 2px; margin-left: 5px"
+                      ></i>
+                    </div>
+                  </div>
+                </div>
               </div>
-              <div
-                v-if="guest.attendance_status && guestCategories.data.length > 0"
-              >
-                <p>Choose Guest Category</p>
-                <ul class="tag" style="margin-top: 0.5rem">
-                  <li
-                    v-for="category in guestCategories.data"
-                    :key="category.id"
-                    :class="{ active: guest.category == category.id }"
-                    @click="guest.category = category.id"
-                  >
-                    {{ category.name }}
-                  </li>
-                </ul>
-                <!-- <p class="text-gray-500 mt-2">
-                  Kategori memudahkan kamu untuk mendapatkan meja pada saat hari
-                  pernikahan.
-                </p> -->
-              </div>
-              <div class="mt-4">
-                <button
-                  class="btn btn-primary btn-action w-full"
-                  :disabled="loading"
-                  @click="attendWedding"
-                >
-                  Attend
-                </button>
-              </div>
-            </div>
-            <div v-else class="info">
-              <div class="check-icon">
-                <i class="el-icon-check"></i>
-              </div>
-              <div class="text-center">
-                <p class="mb-2">
-                  Berhasil terdaftar di Event Nimo TV Gala. Simpan QR untuk menghadiri event.
-                </p>
-                <img
-                  :src="guestResponse.qr_code_url"
-                  alt="Undangan Pernikahan Digital"
-                  class="qr-code"
-                />
-              </div>
-              <!-- <button
-                class="btn btn-primary btn-submit"
-                @click="downloadResource(guestResponse.qr_code_url)"
-              >
-                Simpan QR Code
-              </button> -->
             </div>
           </div>
         </div>
@@ -220,6 +309,7 @@
     const API_BASE_URL = 'https://api.hummingbird.id/api'
     const API_PATH = {
       GUEST_CATEGORY: 'guest-category',
+      COMMENT: 'comment',
       WEDDING: 'wedding',
       WEDDING_GUEST: 'wedding-guest',
       WEDDING_GUEST_CATEGORY: 'wedding-guest-category',
@@ -237,10 +327,15 @@
           guest: {
             name: '',
             email: '',
+            phone: '',
             category: null,
             user_id: null,
             attendance_status: true,
             description: null,
+            message: ''
+          },
+          comments: {
+            data: [],
           },
           loading: false,
           guestResponse: null,
@@ -258,6 +353,7 @@
           }
         }
         this.getAllGuestCategories()
+        this.getAllComments()
 
         const query = this.getQueryParams()
         if (query.to) {
@@ -269,6 +365,7 @@
         AOS.init({
           duration: 1500
         })
+        tabs(document.querySelector('.tab-container'))
         window.addEventListener('scroll', this.handleScroll)
       },
       destroyed() {
@@ -332,6 +429,29 @@
         openAttendanceWrapper() {
           this.wrapper.attendance = true
         },
+        async getAllComments(page = 1, init = true) {
+          try {
+            const response = await axios.get(
+              `${API_BASE_URL}/${API_PATH.WEDDING}/${CODE}/${API_PATH.COMMENT}?page=${page}&sort_by=id&sort_direction=desc`
+            )
+            if (init) {
+              this.comments = response.data
+            } else {
+              response.data.data.forEach((e) => {
+                this.comments.data.push(e)
+              })
+              const temp = this.comments.data
+              this.comments = response.data
+              this.comments.data = temp
+            }
+          } catch (err) {
+            //
+          }
+        },
+        async loadMoreComments() {
+          const page = this.comments.current_page + 1
+          await this.getAllComments(page, false)
+        },
         async getAllGuestCategories() {
           try {
             const response = await axios.get(
@@ -352,6 +472,8 @@
             attendance_status: this.guest.attendance_status,
             name: this.guest.name,
             email: this.guest.email,
+            phone: this.guest.phone,
+            message: this.guest.message,
             user_id: this.guest.user_id,
             category_id: this.guest.category,
           }

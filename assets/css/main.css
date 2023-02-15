@@ -26,6 +26,10 @@ body {
   margin: 1rem auto;
 }
 
+.mt-1 {
+  margin-top: 0.25rem;
+}
+
 .mt-2 {
   margin-top: 0.5rem;
 }
@@ -44,6 +48,10 @@ body {
 
 .mb-6 {
   margin-bottom: 1.5rem;
+}
+
+.font-semibold {
+  font-weight: 600;
 }
 
 .text-center {
@@ -90,7 +98,7 @@ label {
   padding-bottom: 10px;
 }
 
-input, select {
+input, select, textarea {
   width: 100%;
   padding: 10px 12px;
 }
@@ -199,6 +207,18 @@ button {
   color: #0E0610;
 }
 
+.btn-action {
+  background-color: #FAEFDC;
+  border-radius: 30px;
+  box-shadow: 0px 0px 10px #ddd;
+  font-size: 18px;
+  color: #0E0610 !important;
+  padding: 12px 30px;
+}
+.btn-action.lite {
+  background: transparent;
+}
+
 /* Invitation action */
 #invitation-action {
   position: sticky;
@@ -219,16 +239,6 @@ button {
   padding: 0.6rem;
   right: 0;
   bottom: 0;
-}
-#invitation-action .btn-action {
-  background-color: #FAEFDC;
-  border-radius: 30px;
-  box-shadow: 0px 0px 10px #ddd;
-  font-size: 18px;
-  color: #0E0610 !important;
-}
-#invitation-action .btn-action.lite {
-  background: transparent;
 }
 #invitation-action .attendance-wrapper {
   box-shadow: 0px 0px 10px #ddd;
@@ -347,10 +357,10 @@ img.qr-code {
 
 ul.tag {
   margin-top: 0.5rem;
+  margin-bottom: 1rem;
 }
 ul.tag li {
-  margin-top: 0.25rem;
-  margin-bottom: 1rem;
+  margin-top: 0.5rem;
   cursor: pointer;
   display: inline-block;
   padding: 0.5rem 1.2rem;
@@ -371,6 +381,93 @@ ul.tag li.active {
 }
 ul.tag li:last-child {
   margin-right: 0;
+}
+
+.venue-maps {
+  margin-top: 0.5rem;
+  margin-bottom: 2rem;
+}
+
+.counting-text {
+  padding-top: 40px;
+}
+.counting-text * {
+  letter-spacing: 1px;
+}
+.counting-text h2 {
+  font-size: 32px;
+}
+.counting-text p {
+  font-family: "Roboto", sans-serif;
+}
+.counting-text .flex {
+  margin-top: 2rem;
+}
+.counting-text .flex * {
+  color: white;
+}
+.counting-text .flex a {
+  text-decoration: none;
+  display: flex;
+  justify-content: center;
+  border: 1px solid white;
+  width: 55%;
+  padding: 12px 10px;
+  margin-bottom: 10px;
+  border-radius: 30px;
+}
+.counting-text .flex img {
+  width: 20px;
+  margin-right: 0.5rem;
+}
+.counting-text .flex p {
+  text-align: center;
+}
+
+.tab-container {
+  width: 100%;
+}
+
+.tabs {
+  height: 30px;
+  line-height: 30px;
+}
+.tabs .tab {
+  display: inline-block;
+  cursor: pointer;
+  width: 100px;
+  text-align: center;
+}
+.tabs .active {
+  background-color: #efefef;
+}
+
+.tab-panes .tab-pane {
+  border: 1px solid #333333;
+  width: 100%;
+  padding: 20px;
+  display: none;
+}
+.tab-panes .active {
+  display: block;
+}
+
+.user-comments {
+  margin-top: 12px;
+  padding-top: 16px;
+  border-top: 1px solid #ddd;
+}
+.user-comments .content {
+  margin-bottom: 16px;
+}
+.user-comments .load-more {
+  color: #c7c7c7;
+  transition: all 300ms;
+  margin-bottom: 1rem;
+  cursor: pointer;
+}
+.user-comments .load-more:hover {
+  color: #000;
 }
 
 /*# sourceMappingURL=main.css.map */
