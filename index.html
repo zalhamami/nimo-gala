@@ -290,7 +290,7 @@
                         :disabled="loading"
                         @click="attendWedding"
                       >
-                        Attend
+                        Attending
                       </button>
                     </div>
                   </div>
@@ -465,10 +465,9 @@
           return result.replace(/\s\s+/g, ' ')
         },
         handleScroll() {
-          const totalHeight = document.documentElement.scrollHeight
           const currentScroll = document.documentElement.scrollTop
 
-          if (currentScroll < 500 || totalHeight - 1000 < currentScroll) {
+          if (currentScroll < 500) {
             this.hideAction = true
           } else {
             this.hideAction = false
