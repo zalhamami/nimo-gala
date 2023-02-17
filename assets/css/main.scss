@@ -236,6 +236,11 @@ button {
   font-size: 18px;
   color: $color-theme !important;
   padding: 12px 30px;
+  letter-spacing: 1px;
+
+  &.large {
+    font-size: 20px;
+  }
 
   &.lite {
     background: transparent;
@@ -373,12 +378,16 @@ img.qr-code {
 
     &-subtitle {
       line-height: 1.2;
+
+      p {
+        font-size: 22px;
+      }
     }
 
     &-details {
-      border-bottom: 1px solid $color-secondary;
-      max-width: 250px;
-      margin: 4.5rem auto 0 auto;
+      // border-bottom: 1px solid $color-secondary;
+      max-width: 270px;
+      margin: 2rem auto 0 auto;
       padding-bottom: 2rem;
 
       p {
@@ -387,6 +396,11 @@ img.qr-code {
         font-size: $font-size - 4;
         letter-spacing: .5px;
         line-height: 1.5;
+        margin-bottom: 1rem;
+
+        &:last-child {
+          margin-bottom: 0;
+        }
       }
     }
 
@@ -445,6 +459,7 @@ ul.tag {
 .counting {
   &-text {
     padding-top: 40px;
+    padding-bottom: 40px;
 
     * {
       letter-spacing: 1px;
@@ -581,7 +596,7 @@ ul.tag {
 
 .performance {
   position: relative;
-  padding: 80px 20px 0 20px;
+  padding: 50px 20px 0 20px;
   background-image: url('../img/performance/performance-background.jpg');
   background-position: center;
   background-size: cover;
@@ -597,11 +612,16 @@ ul.tag {
 
   &-list {
     padding: 30px 0;
+
+    &-info {
+      margin-top: 1rem;
+      font-size: 20px;
+    }
   }
   
   &-host {
     img {
-      width: 45%;
+      width: 46%;
     }
   }
 

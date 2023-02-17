@@ -214,6 +214,10 @@ button {
   font-size: 18px;
   color: #0E0610 !important;
   padding: 12px 30px;
+  letter-spacing: 1px;
+}
+.btn-action.large {
+  font-size: 20px;
 }
 .btn-action.lite {
   background: transparent;
@@ -332,10 +336,12 @@ img.qr-code {
 #invitation-opening .opening-subtitle {
   line-height: 1.2;
 }
+#invitation-opening .opening-subtitle p {
+  font-size: 22px;
+}
 #invitation-opening .opening-details {
-  border-bottom: 1px solid #FAEFDC;
-  max-width: 250px;
-  margin: 4.5rem auto 0 auto;
+  max-width: 270px;
+  margin: 2rem auto 0 auto;
   padding-bottom: 2rem;
 }
 #invitation-opening .opening-details p {
@@ -344,6 +350,10 @@ img.qr-code {
   font-size: 12px;
   letter-spacing: 0.5px;
   line-height: 1.5;
+  margin-bottom: 1rem;
+}
+#invitation-opening .opening-details p:last-child {
+  margin-bottom: 0;
 }
 #invitation-opening .opening-cheers {
   width: 20%;
@@ -390,6 +400,7 @@ ul.tag li:last-child {
 
 .counting-text {
   padding-top: 40px;
+  padding-bottom: 40px;
 }
 .counting-text * {
   letter-spacing: 1px;
@@ -507,7 +518,7 @@ ul.tag li:last-child {
 
 .performance {
   position: relative;
-  padding: 80px 20px 0 20px;
+  padding: 50px 20px 0 20px;
   background-image: url("../img/performance/performance-background.jpg");
   background-position: center;
   background-size: cover;
@@ -522,8 +533,12 @@ ul.tag li:last-child {
 .performance-list {
   padding: 30px 0;
 }
+.performance-list-info {
+  margin-top: 1rem;
+  font-size: 20px;
+}
 .performance-host img {
-  width: 45%;
+  width: 46%;
 }
 .performance h3 {
   font-size: 24px;
