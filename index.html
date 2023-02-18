@@ -406,6 +406,8 @@
           },
           guestName: 'Guest',
           hideAction: true,
+          soundPlayer: null,
+          playSoundStatus: false,
         }
       },
       created() {
@@ -429,14 +431,17 @@
         })
         tabs(document.querySelector('.tab-container'))
         window.addEventListener('scroll', this.handleScroll)
+        this.soundPlayer = new Audio('assets/sound/awards.mp3')
       },
       destroyed() {
+        this.controlSound()
         window.removeEventListener('scroll', this.handleScroll)
       },
       methods: {
         open() {
           this.opened = true
           this.$emit('opened')
+          this.playSound()
           
           setTimeout(() => {
             new countdown({
@@ -473,8 +478,17 @@
             this.hideAction = false
           }
         },
-        scrollToMessages() {
-          this.$scrollTo('#guest-messages')
+        playSound() {
+          this.soundPlayer.play()
+          this.playSoundStatus = true
+        },
+        controlSound() {
+          if (!this.playSoundStatus) {
+            this.playSound()
+            return
+          }
+          this.soundPlayer.pause()
+          this.playSoundStatus = false
         },
         forceDownload(blob, filename) {
           const a = document.createElement('a')
